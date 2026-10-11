@@ -1,0 +1,18 @@
+version: "1"
+initialize:
+  - run: npm install
+maintenance:
+  - run: npm install
+knowledge:
+  - name: dev
+    run: npm run dev
+    description: Vite dev server on port 3000
+  - name: lint
+    run: npm run lint
+    description: Type-check via tsc --noEmit
+  - name: test
+    run: npm test
+    description: vitest unit tests
+  - name: build
+    run: npm run build
+    description: production build to dist/
