@@ -14,19 +14,26 @@ export function Sheet({
   wide?: boolean;
 }) {
   const ref = useRef<HTMLDivElement>(null);
+  // onClose is an inline closure at every call site — keep it in a ref so the
+  // effect below can run once on mount instead of re-focusing on each render.
+  const onCloseRef = useRef(onClose);
+  onCloseRef.current = onClose;
 
   useEffect(() => {
     const prev = document.activeElement as HTMLElement | null;
-    ref.current?.querySelector<HTMLElement>('input, select, textarea, button')?.focus();
+    const first =
+      ref.current?.querySelector<HTMLElement>('input, select, textarea') ??
+      ref.current?.querySelector<HTMLElement>('button');
+    first?.focus();
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') onClose();
+      if (e.key === 'Escape') onCloseRef.current();
     };
     document.addEventListener('keydown', onKey);
     return () => {
       document.removeEventListener('keydown', onKey);
       prev?.focus?.();
     };
-  }, [onClose]);
+  }, []);
 
   return (
     <>

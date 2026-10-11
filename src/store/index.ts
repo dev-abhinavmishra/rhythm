@@ -544,7 +544,8 @@ export const useRegister = create<RegisterState>()(
         return { ok: true };
       },
 
-      resetRegister: () => set({ ...EMPTY_DATA(), receipt: null, focusedRoutineName: null }),
+      resetRegister: () =>
+        set({ ...EMPTY_DATA(), receipt: null, focusedRoutineName: null, onboardingSeen: false }),
     }),
     {
       name: 'rhythm.register.v1',
