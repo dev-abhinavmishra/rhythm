@@ -1,18 +1,17 @@
-version: "1"
-initialize:
-  - run: npm install
-maintenance:
-  - run: npm install
+# https://docs.devin.ai/onboard-devin/environment-yaml
+# Commands run from the repo root.
+maintenance: |
+  npm install
 knowledge:
   - name: dev
-    run: npm run dev
-    description: Vite dev server on port 3000
+    contents: |
+      npm run dev   # vite dev server on :3000
   - name: lint
-    run: npm run lint
-    description: Type-check via tsc --noEmit
+    contents: |
+      npm run lint  # tsc --noEmit (strict, noUnusedLocals)
   - name: test
-    run: npm test
-    description: vitest unit tests
+    contents: |
+      npm test      # vitest run
   - name: build
-    run: npm run build
-    description: production build to dist/
+    contents: |
+      npm run build # vite build -> dist/
